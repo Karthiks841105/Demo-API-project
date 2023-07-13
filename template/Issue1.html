@@ -1,0 +1,114 @@
+{% load static %}
+<html>
+    <head>
+       <link rel='stylesheet' type="text/css" href="{% static 'style.css' %}">
+        <title>SendMail</title>
+        
+    </head>
+    <style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mobile-container {
+  max-width: 480px;
+  margin: auto;
+  background-color: #555;
+  height: 500px;
+  color: white;
+  border-radius: 10px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+}
+
+
+
+.topnav a {
+  float: left;
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a.icon {
+  float: right;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.active {
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+
+<body >
+
+
+
+<div class="topnav">
+  <a href="main" class="active">>>></a>
+  <div id="myLinks">
+    <a href="list">AllUserdata</a>
+    <a href="new">File</a>
+   <a href="Mail">SendFile</a>
+   <a href="csv1">URL</a>
+    <a href="login">Logout</a>
+  </div>
+  
+  
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+<body background="{% static 'mail2.png' %}" style="background-size: cover">
+
+    <body >
+        <form action="submit" method="POST">
+        {% csrf_token %} 
+        <h1 align="center" style="color: white"> Name </h1>
+        <table border="20" bordercolor="black" cellspacing="25" align="center" style="border-color: white;background: white">
+          
+            <tr>
+                                
+ <td style="color: black"><b>E-Mail</b></td>
+            <td style="border-color:transparent"> <input type="text"  placeholder="Enter E-Mail" name="email" style="height:25px" required></td>
+            </tr>  
+            <tr>
+            <td style="color: black"><b>mail_id</b></td>
+            <td  style="border-color:transparent"><input type="text"  placeholder="Subject" name="Subject" style="height:25px" required></td>
+            </tr>
+           <tr>
+           	<td style="color: black">
+           		<b>Description</b>
+           		<td  style="border-color:transparent"><textarea  name="body" required></textarea>
+           	</td>
+           </tr>
+           	<tr>
+           	 	<td style="color: black">
+           		<b>File</b>
+           		<td  style="border-color:transparent"><input type="File"  name="file"  style="height:25px" required>
+           	</td>
+           </tr>
+           
+           </table>
+    
+
+<center>
+       <input  type="reset"  > 
+  <input type="submit" value="Send">
+    </center>
+</form>
+        
+    </body>       
+</html>
+
+
+

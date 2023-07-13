@@ -1,0 +1,22 @@
+{% extends "csv1.html" %}
+
+<table>
+	<th>
+		<td>States</td>
+	</th>
+	{% for i in states %}
+	<tr>
+		<td>
+		{{i}}
+	</td>
+	</tr>
+	{% endfor %}
+	<tr>
+		<td>
+			{{avg}}
+		</td>
+	</tr>
+</table>
+
+
+C:\\djang\\pro\\template\\CSV.csv

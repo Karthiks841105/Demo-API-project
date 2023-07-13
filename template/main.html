@@ -1,0 +1,300 @@
+{% load static %}
+<html>
+<head> 
+<link  href="{% static 'style.css' %}">
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mobile-container {
+  max-width: 480px;
+  margin: auto;
+  background-color: #555;
+  height: 500px;
+  color: white;
+  border-radius: 10px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+}
+
+
+
+.topnav a {
+  float: left;
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a.icon {
+  float: right;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.active {
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+</head>
+<body background="{% static 'a1.jpg' %} "style="background-size: cover">
+
+
+
+
+<div class="topnav">
+  <a href="main" class="active">>>></a>
+  <div id="myLinks">
+    <a href="list">AllUserdata</a>
+    <a href="new">File</a>
+   <a href="Mail">SendFile</a>
+   <a href="csv1">URL</a>
+    <a href="logout">Logout</a>
+  </div>
+  
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myLinks");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+
+</body>
+</html>
+
+
+    
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+
+    <style type="text/css">
+          body {
+    min-width: 500px;
+    max-width: 2000px;
+    height: 50px;
+    margin: 8px auto;
+}
+
+ul.progress-bar {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 40px;
+    list-style: none;
+}
+
+li.section {
+    display: inline-block;
+    padding-top: 45px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 16px;
+    color: white;
+    vertical-align: top;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+li.section:before {
+    content: 'x';
+    position: absolute;
+    top: 2px;
+    left: calc(50% - 15px);
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid white;
+    border-radius: 17px;
+    line-height: 30px;
+    background: gray;
+    font-size: 40px;
+}
+.status-bar {
+    height: 2px;
+    background: gray;
+    position: relative;
+    top: 20px;
+    margin: 0 auto;
+}
+.current-status {
+    height: 3px;
+    width: 0;
+    border-radius: 1px;
+    background: mediumseagreen;
+}
+
+@keyframes changeBackground {
+    from {background: gray}
+    to {background: mediumseagreen}
+}
+
+li.section.visited:before {
+    content: '\2714';
+    animation: changeBackground .5s linear;
+    animation-fill-mode: forwards;
+}
+
+li.section.visited.current:before {
+    box-shadow: 0 0 0 2px mediumseagreen;
+}
+#progress-bar-wrapper{
+  margin-top: 200px;
+
+}
+
+        </style>
+    </head>
+    <body >
+
+        <div id="progress-bar-wrapper" class="progress-bar-wrapper"></div>
+
+       <script type="text/javascript">
+        //A wrapper to encapsulate all the code
+(function (window) {
+  function initProgressBar() {
+    var ProgressBar = {};
+    ProgressBar.singleStepAnimation = 1000; //default value
+    // this delay is required as browser will need some time in rendering and then processing css animations.
+    var renderingWaitDelay = 200;
+
+    // A utility function to create an element
+    var createElement = function (type, className, style, text) {
+      var elem = document.createElement(type);
+      elem.className = className;
+      for (var prop in style) {
+        elem.style[prop] = style[prop];
+      }
+      elem.innerHTML = text;
+      return elem;
+    };
+
+    var createStatusBar = function(stages, stageWidth, currentStageIndex) {
+      var statusBar = createElement('div', 'status-bar', {width: 100 - stageWidth + '%'}, '');
+      var currentStatus = createElement('div', 'current-status', {}, '');
+
+      setTimeout(function() {
+        currentStatus.style.width = (100 * currentStageIndex)/(stages.length - 1)+'%';
+        currentStatus.style.transition = 'width '+(currentStageIndex * ProgressBar.singleStepAnimation)+'ms linear';
+      }, renderingWaitDelay);
+
+      statusBar.appendChild(currentStatus);
+      return statusBar;
+    };
+
+    var createCheckPoints = function(stages, stageWidth, currentStageIndex) {
+      var ul = createElement('ul', 'progress-bar', { }, '');
+      var animationDelay = renderingWaitDelay;
+      for (var index = 0; index < stages.length; index++) {
+        var li = createElement('li', 'section', {width: stageWidth + '%'}, stages[index]);
+        if(currentStageIndex >= index) {
+          setTimeout(function(li, currentStageIndex, index) {
+            li.className+= (currentStageIndex > index)?' visited': ' visited current';
+          }, animationDelay, li, currentStageIndex, index);
+          animationDelay+= ProgressBar.singleStepAnimation;
+        }
+        ul.appendChild(li);
+      }
+      return ul;
+    };
+
+    var createHTML = function (wrapper, stages, currentStage) {
+      var stageWidth = 100 / stages.length;
+      var currentStageIndex = stages.indexOf(currentStage);
+
+      //create status bar
+      var statusBar = createStatusBar(stages, stageWidth, currentStageIndex);
+      wrapper.appendChild(statusBar);
+
+      //create checkpoints
+      var checkpoints = createCheckPoints(stages, stageWidth, currentStageIndex);
+      wrapper.appendChild(checkpoints);
+
+      return wrapper;
+    };
+
+    var validateParameters = function(stages, currentStage, container) {
+      if(!(typeof stages === 'object' && stages.length && typeof stages[0] === 'string')) {
+        console.error('Expecting Array of strings for "stages" parameter.');
+        return false;
+      }
+      if(typeof currentStage !== 'string') {
+        console.error('Expecting string for "current stage" parameter.');
+        return false;
+      }
+      if(typeof container !== 'string' && typeof container !== 'undefined') {
+        console.error('Expecting string for "container" parameter.');
+        return false;
+      }
+      return true;
+    };
+
+    //exposing this function to user;
+    ProgressBar.init = function (stages, currentStage, container) {
+      if(validateParameters(stages, currentStage, container)) {
+        var wrapper = document.getElementsByClassName(container);
+        if(wrapper.length > 0) {
+          wrapper = wrapper[0];
+        } else {
+          wrapper = createElement('div', 'progressbar-wrapper', { }, '');
+          document.body.appendChild(wrapper);
+        }
+        createHTML(wrapper, stages, currentStage);
+      }
+    };
+    return ProgressBar;
+  }
+
+  if (typeof ProgressBar === 'undefined') {
+    window.ProgressBar = initProgressBar();
+  } else {
+    console.log('Progress bar loaded');
+  }
+
+})(window);
+       </script>
+       <script type="text/javascript">
+        ProgressBar.singleStepAnimation = 1500;
+ProgressBar.init(
+  [ 'Request Submitted',
+    'Received Responses',
+    'Negotiation Done',
+    'Hired Professional',
+    'Service Completed'
+  ],
+  'Hired Professional',
+  'progress-bar-wrapper'
+   // created this optional parameter for container name (otherwise default container created)
+);
+       </script>
+    </body>
+</body>
+</html>

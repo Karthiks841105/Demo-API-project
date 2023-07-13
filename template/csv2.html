@@ -1,0 +1,25 @@
+{% extends "csv1.html" %}
+
+{% block content %}
+
+
+
+<table style="color: white;font-size:7">
+	<th>
+		<td>States</td>
+	</th>
+	{% for i in states %}
+	
+	<tr>
+		<td>
+		{{i}}
+	</td>
+	</tr>
+	{% endfor %}
+	<tr>
+		<td>
+			{{avg}}
+		</td>
+	</tr>
+</table>
+{% endblock %}
