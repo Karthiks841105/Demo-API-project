@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import*
 from app1.models import*
 import re
-import smtplib
 import pandas as pd
 from datetime import datetime
 def list1(req):
