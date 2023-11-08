@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/iquippo
+    destination: /home/ubuntu/pro
 hooks:
   BeforeInstall:
       - location: scripts/before_install.sh
