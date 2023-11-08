@@ -7,14 +7,14 @@ sudo pkill -f runserver
 # sudo pkill -f tailwind
 # sudo pkill -f node
 
-cd /home/ubuntu/iquippo/
+cd /home/ubuntu/pro/
 
 # activate virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
 install requirements.txt
-pip install -r /home/ubuntu/iquippo/requirements.txt
+pip install -r /home/ubuntu/pro/requirements.txt
 
 # run server
 
